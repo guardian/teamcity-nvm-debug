@@ -1,0 +1,30 @@
+#!/usr/bin/env bash
+
+# set -e
+
+loadNVM() {
+  # How dotcom-rendering loads nvm https://github.com/guardian/dotcom-rendering/blob/main/scripts/ci-ar.sh
+  source ~/.nvm/nvm.sh
+}
+
+MANUALLY_SOURCE_NVM=true
+
+for arg in "$@"; do
+  if [ "$arg" == "--no-nvm" ]; then
+    MANUALLY_SOURCE_NVM=false
+    shift
+  fi
+done
+
+if [ "$MANUALLY_SOURCE_NVM" == true ] ; then
+  loadNVM
+fi
+
+node -v
+
+nvm install
+nvm use
+
+node -v
+npm install
+npm start
