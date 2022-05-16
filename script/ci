@@ -1,6 +1,6 @@
 #!/usr/bin/env bash
 
-# set -e
+set -e
 
 loadNVM() {
   # How dotcom-rendering loads nvm https://github.com/guardian/dotcom-rendering/blob/main/scripts/ci-ar.sh
@@ -20,11 +20,13 @@ if [ "$MANUALLY_SOURCE_NVM" == true ] ; then
   loadNVM
 fi
 
-node -v
+# `node` is only available after nvm has run
+# node -v
 
 nvm install
 nvm use
 
 node -v
+npm -v
 npm install
 npm start
